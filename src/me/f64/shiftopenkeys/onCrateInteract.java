@@ -11,6 +11,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.hazebyte.crate.api.crate.Crate;
+import com.hazebyte.crate.api.crate.CrateRegistrar;
 import com.hazebyte.crate.api.crate.CrateAction;
 import com.hazebyte.crate.api.crate.reward.Reward;
 import com.hazebyte.crate.api.event.CrateInteractEvent;
@@ -55,7 +56,7 @@ public class onCrateInteract implements Listener {
                 if (!(p.getInventory().firstEmpty() == -1)) {
                     if (crate != null) {
                         p.getInventory().getItemInHand().setAmount(p.getInventory().getItemInHand().getAmount() - 1);
-                        List<Reward> rewards = crate.generatePrizes(p);
+                        List<Reward> rewards = ShiftKeysOpen.crates.getCrateRegistrar().generateCrateRewards(crate, p);
                         for (Reward reward : rewards) {
                             reward.onWin(p);
                         }
